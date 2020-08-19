@@ -6,6 +6,7 @@ public class PersonWrapper {
 
 	private List<Person> persons;
 
+    
 	public List<Person> getPersons() {
 		return persons;
 	}
@@ -13,4 +14,5 @@ public class PersonWrapper {
 	public void setPersons(List<Person> persons) {
 		this.persons = persons;
 	}
+
 }
