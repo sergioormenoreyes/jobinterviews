@@ -1,4 +1,4 @@
-FROM gcr.io/google-appengine/openjdk:8
+FROM adoptopenjdk/openjdk11:latest
 
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
