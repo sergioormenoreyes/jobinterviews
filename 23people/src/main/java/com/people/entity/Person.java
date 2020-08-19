@@ -1,27 +1,47 @@
 package com.people.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
+@Table(name="person")
 public class Person {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 	
+	@NotBlank(message = "validation error")
+	@Column(name="national_id")
 	private String nationalId;
 	
+	@NotBlank(message = "validation error")
+	@Column(name="name")
 	private String name;
 	
+	@NotBlank(message = "validation error")
+	@Column(name="last_name")
 	private String lastName;
 	
+	@NotNull(message= "validation error")
+	@Range(min = 1)
+	@Column(name="age")
 	private Integer age;
 	
+	@NotBlank(message = "validation error")
+	@Column(name="origin_planet")
 	private String originPlanet;
 	
+	@NotBlank(message = "validation error")
+	@Column(name="picture_url")
 	private String pictureUrl;
 
 	public Integer getId() {

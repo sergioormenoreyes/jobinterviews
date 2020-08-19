@@ -2,7 +2,10 @@ package com.people.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +15,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.people.entity.Person;
+import com.people.entity.PersonWrapper;
 import com.people.repository.PersonRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController // This means that this class is a Controller
 @RequestMapping(path = "/") // This means URL's start with /demo (after Application path)
 public class PeopleController {
@@ -49,10 +51,14 @@ public class PeopleController {
 		return entities;
 	}
 
-	@PostMapping(value = "people",  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<JSONObject>> saveAll(@RequestBody Person person) {
+	@PostMapping(value = "people")
+	public ResponseEntity<List<JSONObject>> saveAll(@Valid @RequestBody PersonWrapper persons) {
 		try {
-			System.out.println(person);
+			for (Person person : persons.getPersons()) {
+				personsRepository.save(person);
+			}
+		} catch (ConstraintViolationException e) {
+			return new ResponseEntity<List<JSONObject>>(HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<List<JSONObject>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
