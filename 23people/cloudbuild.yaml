@@ -1,15 +1,15 @@
 steps:
   # build the container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${TAG}", "."]
+  args: ["build", "-t", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}", "."]
   # push container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${TAG}"]
+  args: ["push", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}"]
   # deploy container image to GKE
 - name: "gcr.io/cloud-builders/gke-deploy"
   args:
   - run
   - --filename=kubernetes-config-file
-  - --image=gcr.io/project-id/image:tag
-  - --location=${LOCATION}
-  - --cluster=${CLUSTER_NAME}
+  - --image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}
+  - --location=${_LOCATION}
+  - --cluster=${_CLUSTER_NAME}

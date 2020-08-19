@@ -18,7 +18,7 @@ spec:
         app: devops-test
     spec:
       containers:
-      - image: gcr.io/psyched-ceiling-286818/23people-devops-test:latest
+      - image: gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}
         name: 23people-devops-test
         resources: {}
 status: {}
