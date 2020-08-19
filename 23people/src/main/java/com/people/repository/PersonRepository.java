@@ -6,5 +6,7 @@ import com.people.entity.Person;
 
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
+	
+	Person findByNationalId(String nationalId);
 
 }

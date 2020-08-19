@@ -2,7 +2,6 @@ package com.people.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -13,12 +12,8 @@ import org.hibernate.validator.constraints.Range;
 @Entity
 @Table(name="person")
 public class Person {
-
-	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="id")
-	private Integer id;
 	
+	@Id
 	@NotBlank(message = "validation error")
 	@Column(name="national_id")
 	private String nationalId;
@@ -43,14 +38,6 @@ public class Person {
 	@NotBlank(message = "validation error")
 	@Column(name="picture_url")
 	private String pictureUrl;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNationalId() {
 		return nationalId;

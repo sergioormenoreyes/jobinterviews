@@ -1,6 +1,7 @@
 package com.people.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.people.entity.Person;
@@ -30,6 +32,16 @@ public class PeopleController {
 	@GetMapping(value = "people", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Iterable<Person>> getAll() {
 		return new ResponseEntity<Iterable<Person>>(personsRepository.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "people/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Person> getByNationalID(@RequestParam String nationalId) {
+		Person rsp = personsRepository.findByNationalId(nationalId);
+		Optional<Person> opt = Optional.ofNullable(rsp);
+		if(!opt.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Person>(rsp, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "people")
