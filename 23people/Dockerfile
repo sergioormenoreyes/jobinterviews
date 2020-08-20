@@ -9,10 +9,11 @@ FROM adoptopenjdk/openjdk11:latest
 ENV LANG C.UTF-8
 
 # Default copy (Gradle)
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar
+COPY --from=gradle_build /home/gradle/src/build/libs/*.jar /app/app.jar
 
 
 # Default workspace dir
+RUN mkdir /api
 RUN ls /api
 WORKDIR /api
 
