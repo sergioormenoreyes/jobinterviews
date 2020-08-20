@@ -1,7 +1,7 @@
 steps:
   # build the container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}", ${_DOCKERFILE}]
+  args: ["build", "-t", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}", "${_DOCKERFILE}"]
   # push container image
 - name: "gcr.io/cloud-builders/docker"
   args: ["push", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}"]
