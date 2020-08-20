@@ -38,5 +38,13 @@ spec:
     targetPort: 8080
   selector:
     app: devops-test
-  type: ClusterIP
-status:
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: devops-test-ingress
+spec:
+  backend:
+    serviceName: devops-test
+    servicePort: 8080
