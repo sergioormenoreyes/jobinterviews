@@ -6,11 +6,11 @@ steps:
 - name: "gcr.io/cloud-builders/docker"
   args: ["push", "gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}"]
   # deploy container image to GKE
-- name: "gcr.io/cloud-builders/kubectl"
-  args: ["apply", "-f", "${_DOCKERFILE}/deployments/k8s/"]
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=_${LOCATION}'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
+##- name: "gcr.io/cloud-builders/kubectl"
+#  args: ["apply", "-f", "${_DOCKERFILE}/deployments/k8s/"]
+#  env:
+#  - 'CLOUDSDK_COMPUTE_ZONE=_${LOCATION}'
+#  - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
   # update gke image
 #- name: "gcr.io/cloud-builders/kubectl"
 #  args: ["set", "image", "deployment", "${_IMAGE_NAME}", "${_IMAGE_NAME}=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}"]
@@ -18,4 +18,3 @@ steps:
 #  - 'CLOUDSDK_COMPUTE_ZONE=_${LOCATION}'
 #  - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
   # next step if needed
-
