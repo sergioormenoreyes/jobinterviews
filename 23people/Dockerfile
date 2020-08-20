@@ -1,10 +1,16 @@
+FROM gradle:6.6-jdk11 AS gradle_build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build --no-daemon
+
 FROM adoptopenjdk/openjdk11:latest
 
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 
 # Default copy (Gradle)
-COPY ./build/libs/*.jar /api/app.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar
+
 
 # Default workspace dir
 RUN ls /api
