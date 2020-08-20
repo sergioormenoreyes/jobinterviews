@@ -9,7 +9,7 @@ steps:
 - name: "gcr.io/cloud-builders/gke-deploy"
   args:
   - run
-  - --filename=deployment
+  - --filename=deployments/k8s/deployment
   - --image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_TAG}
   - --location=${_LOCATION}
   - --cluster=${_CLUSTER_NAME}
