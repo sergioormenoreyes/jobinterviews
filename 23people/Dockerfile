@@ -14,9 +14,7 @@ COPY --from=gradle_build /home/gradle/src/build/libs/*.jar /app/app.jar
 
 # Default workspace dir
 RUN mkdir /api
-
 RUN ls /api
-
 WORKDIR /api
 
 # no root execution
