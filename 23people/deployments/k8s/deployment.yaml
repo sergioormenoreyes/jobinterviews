@@ -26,14 +26,13 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     app: devops-test
   name: devops-test
 spec:
   ports:
-  - name: 8080-8080
-    port: 8080
+  - name: http
+    port: 80
     protocol: TCP
     targetPort: 8080
   selector:
@@ -45,6 +44,10 @@ kind: Ingress
 metadata:
   name: devops-test-ingress
 spec:
-  backend:
-    serviceName: devops-test
-    servicePort: 8080
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: devops-test
+          servicePort: 8080
