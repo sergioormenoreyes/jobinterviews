@@ -37,15 +37,6 @@ public class PeopleController {
 		return new ResponseEntity<Iterable<Person>>(personsRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "people/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Person> getByNationalId(@RequestParam String nationalId) {
-		Person rsp = personsRepository.findByNationalId(nationalId);
-		Optional<Person> opt = Optional.ofNullable(rsp);
-		if(!opt.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Person>(rsp, HttpStatus.OK);
-	}
 
 	@GetMapping(value = "people/{nationalId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Person> getByNationalIdPath(@PathVariable String nationalId) {
