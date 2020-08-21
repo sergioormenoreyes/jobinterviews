@@ -40,6 +40,7 @@ public class PeopleController {
 
 	@GetMapping(value = "people/{nationalId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Person> getByNationalIdPath(@PathVariable String nationalId) {
+		System.out.println("");
 		Person rsp = personsRepository.findByNationalId(nationalId);
 		Optional<Person> opt = Optional.ofNullable(rsp);
 		if(!opt.isPresent()) {
